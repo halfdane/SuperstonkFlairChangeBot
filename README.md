@@ -1,8 +1,15 @@
 # superstonkFlairChangeBot
 
-A bot that finds posts with obsolete flairs and changes the old flair to the new flair.
+A bot that supports mod-controlled flair granting.
 
-Passing the parameter '-t' enables the test-mode which doesn't create a reddit post.
+While the bot runs, comment in Superstonk `!flairy:explain!`
+
+To grant a flair, copy the user's request (something like `!FLAIRY!🚀Flair text🚀(red)`) into a response to their request.
+The flairy bot will replace your comment with a cute confirmation message if everything went right,
+otherwise it will be a humouros error message.
+
+You will get a DM from the flairy containing the details of the change so you have a chance of 
+reverting them in case something goes terribly wrong!
 
 
 # Run
@@ -18,12 +25,11 @@ You have to export the following environment variables:
 
 Afterwards execute
 
-    make
+    make flairy
 
-This sets up the venv for python and downloads the necessary dependencies before running the bot in test-mode 
+This sets up the venv for python and downloads the necessary dependencies before running the tests and starting the bot  
 
 # Targets
 
-    make fake_run   # execute the bot in test mode.
-    make run        # execute the bot in normal mode. Please note that this will create a new comment with each execution
+    make flairy     # execute the bot 
     make clean      # clean up compile results and the venv

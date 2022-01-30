@@ -1,12 +1,14 @@
 SHELL := /bin/bash
 
-.PHONY: fake_run
-fake_run: venv
-	./venv/bin/python src/main.py -t
+.PHONY: reflair
+reflair: venv
+	date
+	./venv/bin/python src/reflair_posts.py -t
 
-.PHONY: run
-run: venv
-	./venv/bin/python src/main.py
+.PHONY: flairy
+flairy: venv
+	./venv/bin/pytest tests/test_flairy.py
+	./venv/bin/python src/flairy.py
 
 venv: venv/touchfile
 
