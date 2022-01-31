@@ -3,7 +3,7 @@ SHELL := /bin/bash
 .PHONY: reflair
 reflair: venv
 	date
-	./venv/bin/python src/reflair_posts.py -t
+	./venv/bin/python src/reflair_posts.py
 
 .PHONY: flairy
 flairy: venv
