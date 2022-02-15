@@ -4,6 +4,9 @@ import src.flairy as flairy
 def match(string, expected1, expected2):
     m = flairy.flairy_detect_user_flair_change.match(string)
 
+    print(m.group(1))
+    print(m.group(2))
+
     if expected1:
         assert m.group(1).strip() == expected1
 
@@ -26,30 +29,24 @@ def test_whitespace_variations():
     match("!Flairy!something ", "something", None)
     match("!Flairy!something", "something", None)
 
-    match("!Flairy!  something  (red)  ", "something", "red")
-    match("!Flairy!something  (red)  ", "something", "red")
-    match("!Flairy!  something(red)  ", "something", "red")
-    match("!Flairy!  something  (red)", "something", "red")
+    match("!Flairy!  something  red  ", "something", "red")
+    match("!Flairy!something  red  ", "something", "red")
+    match("!Flairy!  something red  ", "something", "red")
+    match("!Flairy!  something  red", "something", "red")
 
-    match("!Flairy!something(red)  ", "something", "red")
-    match("!Flairy!something  (red)", "something", "red")
-    match("!Flairy!something(red)", "something", "red")
+    match("!Flairy!something red  ", "something", "red")
+    match("!Flairy!something  red", "something", "red")
 
-    match("!Flairy!  something  ( red )  ", "something", "red")
-    match("!Flairy!something  ( red )  ", "something", "red")
-    match("!Flairy!  something( red )  ", "something", "red")
-    match("!Flairy!  something  ( red )", "something", "red")
+    match("!Flairy!  something   red   ", "something", "red")
+    match("!Flairy!something   red   ", "something", "red")
+    match("!Flairy!  something red   ", "something", "red")
+    match("!Flairy!  something   red ", "something", "red")
 
-    match("!Flairy!something( red )  ", "something", "red")
-    match("!Flairy!something  ( red )", "something", "red")
-    match("!Flairy!something( red )", "something", "red")
+    match("!Flairy!something red   ", "something", "red")
+    match("!Flairy!something   red ", "something", "red")
+    match("!Flairy!something red ", "something", "red")
 
+    match("! FLAIRY ! Lotion in the basket ✅", "Lotion in the basket ✅", None)
 
-def test_explanation_message():
-    assert flairy.explanation_message() == \
-        "Respond to this comment with the magic incantation\n\n"\
-        "    !FLAIRY!🚀 My Flair Text 🚀\n\n" \
-        "Default color is black.  \nControl color by appending **one** of " \
-        "`(red)`, `(blue)`, `(pink)`, `(yellow)`, `(green)`, `(black)`"
 
 

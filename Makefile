@@ -7,8 +7,11 @@ reflair: venv
 
 .PHONY: flairy
 flairy: venv
-	./venv/bin/pytest tests/test_flairy.py
 	./venv/bin/python src/flairy.py
+
+.PHONY: test
+test: venv
+	./venv/bin/pytest tests/test_flairy.py
 
 venv: venv/touchfile
 
