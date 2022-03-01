@@ -21,7 +21,7 @@ def match(string, expected1, expected2):
 def test_multiline():
     match(">\n      >\n >"
                "!Flairy! king gizzard and the lizard wizard 🚀 "
-               "(red)\n    ￼\n    ", "king gizzard and the lizard wizard 🚀", "red")
+               "red  \n  whatever  ￼\n   neyy ", "king gizzard and the lizard wizard 🚀", "red")
 
 def test_whitespace_variations():
     match("!Flairy! something ", "something", None)
@@ -48,5 +48,20 @@ def test_whitespace_variations():
 
     match("! FLAIRY ! Lotion in the basket ✅", "Lotion in the basket ✅", None)
 
+
+def test_valid_colors():
+    match("!Flairy!  something   red   ", "something", "red")
+    match("!Flairy!  something   blue   ", "something", "blue")
+    match("!Flairy!  something   pink   ", "something", "pink")
+    match("!Flairy!  something   yellow   ", "something", "yellow")
+    match("!Flairy!  something   green   ", "something", "green")
+    match("!Flairy!  something   black   ", "something", "black")
+
+
+def test_invalid_colors():
+    match("!Flairy!  something   violet   ", "something   violet", None)
+    match("!Flairy!  something coral   ", "something coral", None)
+    match("!Flairy!  something sparkle   ", "something sparkle", None)
+    match("!Flairy!  something purple   ", "something purple", None)
 
 

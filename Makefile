@@ -1,13 +1,13 @@
 SHELL := /bin/bash
 
+.PHONY: flairy
+flairy: venv
+	./venv/bin/python src/flairy.py
+
 .PHONY: reflair
 reflair: venv
 	date
 	./venv/bin/python src/reflair_posts.py
-
-.PHONY: flairy
-flairy: venv
-	./venv/bin/python src/flairy.py
 
 .PHONY: test
 test: venv

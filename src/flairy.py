@@ -6,10 +6,10 @@ import os
 flairy_detection = "!flairy!"
 
 flairy_detect_user_flair_change = \
-    re.compile(r".*!\s*FLAIRY\s*!([^(]*)(?:\(([^)]*)\).*)?",
+    re.compile(r".*!\s*FLAIRY\s*!(.*?)(?:(red|blue|pink|yellow|green|black))?\s*$",
                re.IGNORECASE | re.MULTILINE | re.DOTALL)
 
-templates = {"red": "509c1d8c-f3ce-11eb-9fd1-d69d0cd1d5b9",
+templates = {"red": "0446bc04-91c0-11ec-8118-ce042afdde96",
              "blue": "6e40ab4c-f3cd-11eb-889e-ae4cdf00ff3b",
              "pink": "6de5f58e-f3ce-11eb-af43-eae78a59944d",
              "yellow": "5f91a294-f3ce-11eb-948b-d26e0741292d",
@@ -49,8 +49,7 @@ def flair_user(comment, user_to_be_flaired, flair_match, color_match):
     else:
         template = templates[color]
         previous_flair = next(subreddit.flair(user_to_be_flaired))
-        log_message = f"changing {user_to_be_flaired}'s flair from [{previous_flair['flair_text']}] " \
-                      f"in [{comment.author_flair_background_color}] to [{flair_text}] in [{color}] "
+        log_message = f"[{previous_flair['flair_text']}] => [{flair_text}]"
         subreddit.flair.set(redditor=user_to_be_flaired, text=flair_text, flair_template_id=template)
         message = rf"(✿\^‿\^)━☆ﾟ.*･｡ﾟ {flair_text}"
         comment.parent().upvote()
