@@ -51,9 +51,8 @@ def flair_user(comment, user_to_be_flaired, flair_match, color_match):
         previous_flair = next(subreddit.flair(user_to_be_flaired))
         log_message = f"[{previous_flair['flair_text']}] => [{flair_text}]"
         subreddit.flair.set(redditor=user_to_be_flaired, text=flair_text, flair_template_id=template)
-        message = rf"(✿\^‿\^)━☆ﾟ.*･｡ﾟ {flair_text}"
+        message = rf"(✿\^‿\^)━☆ﾟ.*･｡ﾟ `{flair_text}` >!Used to be `{previous_flair['flair_text']}`!<"
         comment.parent().upvote()
-    comment.parent().report(log_message)
     logging.info(log_message)
     comment.edit(message)
 
@@ -76,5 +75,5 @@ if __name__ == "__main__":
         try:
             watch_me(reddit.user.me())
         except Exception as e:
-            logging.error("Ignoring ", e)
+            logging.error(e)
 
